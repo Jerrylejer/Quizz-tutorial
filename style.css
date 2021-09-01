@@ -71,6 +71,7 @@ p {
 .btn-submit:hover {
   background: rgb(162, 223, 230);
   transition: 0.2s;
+  cursor: pointer;
 }
 
 .msg-valid {
