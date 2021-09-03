@@ -22,7 +22,7 @@
     <section class="quizz-container">
       <form class="quizz-form">
         <h1>Quizz Culture Générale !</h1>
-        <div class="quest-quizz mypadd-20">
+        <div class="quest-quizz q1 echec ok wrong mypadd-20" id="q1">
           <h3>Qui est l'empereur de France le 2 décembre 1804 ?</h3>
           <!-- chaque input doit être dans sa propre div et non tous inclus dans une seule -->
           <!-- sinon input apparaissent sur la même ligne -->
@@ -42,7 +42,7 @@
             <label for="Napoléon">Napoléon Bonaparte</label>
           </div>
         </div>
-        <div class="quest-quizz mypadd-20">
+        <div class="quest-quizz q2 echec ok wrong mypadd-20" id="q2">
           <h3>Quelle est la date d'indépendance des États-Unis ?</h3>
           <div>
             <input type="radio" id="date1" name="q2" value="a" checked>
@@ -57,7 +57,7 @@
             <label for="date3">30 juin 1925</label>
           </div>
         </div>
-        <div class="quest-quizz mypadd-20">
+        <div class="quest-quizz q3 echec ok wrong mypadd-20" id="q3">
           <h3>La chute de l'empire Romain se situe en ?</h3>
           <div> 
             <input type="radio" id="date4" name="q3" value="a" checked>
@@ -65,14 +65,14 @@
           </div>
           <div>
             <input type="radio" id="date5" name="q3" value="b">
-            <label for="">395 ap. J.-C.</label>
+            <label for="date5">395 ap. J.-C.</label>
           </div>
           <div>
             <input type="radio" id="date6" name="q3" value="c"></input>
-            <label for="">-740 av. J.-C.</label>
+            <label for="date6">-740 av. J.-C.</label>
           </div>
         </div>
-        <div class="quest-quizz mypadd-20">
+        <div class="quest-quizz q4 echec ok wrong mypadd-20" id="q4">
           <h3>Quelle est la capitale de la Slovénie ?</h3>
           <div><input type="radio" id="Ljubljana" name="q4" value="a" checked>
             <label for="Ljubljana">Ljubljana</label>
@@ -85,7 +85,7 @@
             <label for="Bratislava">Bratislava</label>
           </div>
         </div>
-        <div class="quest-quizz mypadd-20">
+        <div class="quest-quizz q5 echec ok wrong mypadd-20" id="q5">
           <h3>Combien d'habitants compte l'Irlande en 2020 ?.</h3>
           <div><input type="radio" id="pop1" name="q5" value="a" checked>
             <label for="pop1">1,365 Million</label>
@@ -101,7 +101,9 @@
           <button class="btn-submit">Validez vos choix !</button>
         </div>
         <div class="msg-valid mypadd-30">
-          <p>Cliquez sur valider pour voir les résultats.</p>
+          <h2>Cliquez sur valider pour voir les résultats.</h2>
+          <p class="aide"></p>
+          <p class="note"></p>
         </div>
       </form>
     </section>

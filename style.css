@@ -9,7 +9,9 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
+
 h1 {
+  font-family: "Russo One", Arial;
   margin-top: 30px;
   margin-bottom: 40px;
   font-size: 280%;
@@ -70,8 +72,30 @@ p {
 
 .btn-submit:hover {
   background: rgb(162, 223, 230);
-  transition: 0.2s;
+  transition: 0.2s ease-in-out;
   cursor: pointer;
+  /* possibilité en une ligne = background-color 0.2s ease-in-out (lent début en fin normal au millieu */
+}
+
+/* Ajout de l'animation Echec */
+
+.echec {
+  animation: echec 0.3s ease-in-out;
+}
+
+@keyframes echec {
+  0% {
+    transform: translateX(0px);
+  }
+  33% {
+    transform: translateX(5px);
+  }
+  66% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
 }
 
 .msg-valid {
@@ -80,3 +104,27 @@ p {
   border-radius: 5px;
   box-shadow: 1px 1px 5px rgba(128, 128, 128, 0.897);
 }
+
+.aide {
+  text-align: center;
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+.note {
+  text-align: center;
+  font-size: 25px;
+  margin-top: 10px;
+}
+
+/* CSS pour la programmation */
+
+/* Class couleurs questionnaires valides ou non valides*/
+
+/* .ok {
+  background: rgb(141, 243, 141);
+}
+
+.wrong {
+  background: rgb(253, 164, 179);
+} */
