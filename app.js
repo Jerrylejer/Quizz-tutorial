@@ -1,4 +1,4 @@
-"use strict";
+// "use strict";
 
 const form = document.querySelector(".quizz-form");
 // Ce tab recueille les choix du joueur
@@ -8,16 +8,13 @@ const reponses = ["c", "a", "b", "a", "c"];
 // Interaction sur l'encart message fin de quizz
 const emojis = ["✔️", "✨", "👀", "😭", "👎"];
 let titreResultat = document.querySelector(".msg-valid h2");
-let sideResultat = document.querySelector(".aide");
+let aideResultat = document.querySelector(".aide");
 let texteResultat = document.querySelector(".note");
 
 // Interaction sur les encarts quizz
 const toutesLesQuestions = document.querySelectorAll(".quest-quizz");
-
+console.log(toutesLesQuestions);
 // Enlever les couleurs correspondant à la comparaison des réponses
-const color = document
-  .querySelectorAll(".quest-quizz")
-  .classList.remove("ok", "wrong");
 // document.querySelector(".q1").classList.remove("wrong");
 // document.querySelector(".q2").classList.remove("ok");
 // document.querySelector(".q2").classList.remove("wrong");
@@ -32,6 +29,7 @@ const color = document
 let verifTableau = [];
 // RECUPERATION DES DONNEES CLIQUEES SUR LE QUIZZ DANS UN TABLEAU
 // fonction anonyme de récupération des données cliquées
+// UTILISATION DE LA METHODE PREVENTDEFAULT
 form.addEventListener("submit", (e) => {
   // (e) renvoi à la méthode e.preventDefault()
   // permet d'annuler l'effet clic bouton (soumettre le form), lien (suivre l'url).
@@ -60,6 +58,7 @@ function funcVerifTableau(tableauResultats) {
   }
   console.log(verifTableau);
   afficherResultats(verifTableau);
+  couleursFunction(verifTableau);
   verifTableau = [];
 }
 
@@ -71,36 +70,35 @@ function afficherResultats(verifTableau) {
   // .length pour avoir la longueur du tableau ET l'affichage du nbre de fautes
   const nbDeFautes = verifTableau.filter((el) => el !== true).length;
   // console.log(nbDeFautes);
-  titreResultat.textContent = "";
 
   switch (nbDeFautes) {
     case 0:
       titreResultat.textContent = `${emojis[0]} Bravo, c"est un sans faute ! ${emojis[0]}`;
-      sideResultat.textContent =
+      aideResultat.textContent =
         "Retentez une autre réponse dans les cases rouges, puis re-validez !";
       texteResultat.textContent = `5/5`;
       break;
     case 1:
       titreResultat.textContent = `${emojis[1]} Vous y êtes presque ! ${emojis[1]}`;
-      sideResultat.textContent =
+      aideResultat.textContent =
         "Retentez une autre réponse dans les cases rouges, puis re-validez !";
       texteResultat.textContent = `4/5`;
       break;
     case 2:
       titreResultat.textContent = `${emojis[1]} Encore un effort ... ${emojis[2]}`;
-      sideResultat.textContent =
+      aideResultat.textContent =
         "Retentez une autre réponse dans les cases rouges, puis re-validez !";
       texteResultat.textContent = `3/5`;
       break;
     case 3:
       titreResultat.textContent = `${emojis[2]} Il reste quelques erreurs. ${emojis[3]}`;
-      sideResultat.textContent =
+      aideResultat.textContent =
         "Retentez une autre réponse dans les cases rouges, puis re-validez !";
       texteResultat.textContent = `2/5`;
       break;
     case 4:
       titreResultat.textContent = `${emojis[3]} Peux mieux faire. ${emojis[3]}`;
-      sideResultat.textContent =
+      aideResultat.textContent =
         "Retentez une autre réponse dans les cases rouges, puis re-validez !";
       texteResultat.textContent = `1/5`;
       break;
@@ -108,37 +106,42 @@ function afficherResultats(verifTableau) {
       titreResultat.textContent = `${emojis[4]} Peux mieux faire. ${emojis[4]}`;
       texteResultat.textContent = `0/5`;
       break;
+    default:
+      "Ce n'était pas prévu !";
   }
 }
 
 // FONCTION QUI COLORE LES QUIZZ EN ROUGE OU VERT SELON LA REPONSE
-// Il faut comparer le tableau "tableauResultat" avec la variable "reponse"
+// couleursFunction(verifTableau) dans FONCTION VERIF TABLEAU REPONSES
+// UTILISATION DE LA MLETHODE SETTIMEOUT()
 
-function backColor() {
-  if (tableauResultats[0] === reponses[0]) {
-    document.getElementById(".q1").add("ok");
-  } else {
-    document.getElementById(".q1").add("wrong");
-  }
-  if (tableauResultats[1] === reponses[1]) {
-    document.getElementById(".q2").add("ok");
-  } else {
-    document.getElementById(".q2").add("wrong");
-  }
-  if (tableauResultats[2] === reponses[2]) {
-    document.getElementById(".q3").add("ok");
-  } else {
-    document.getElementById(".q3").add("wrong");
-  }
-  if (tableauResultats[3] === reponses[3]) {
-    document.getElementById(".q4").add("ok");
-  } else {
-    document.getElementById(".q4").add("wrong");
-  }
-  if (tableauResultats[4] === reponses[4]) {
-    document.getElementById(".q5").add("ok");
-  } else {
-    document.getElementById(".q5").add("wrong");
+function couleursFunction(tabValsBool) {
+  for (let i = 0; i < tabValsBool.length; i++) {
+    if (tabValsBool[i] === true) {
+      toutesLesQuestions[i].style.background = "lightgreen";
+    } else {
+      toutesLesQuestions[i].style.background = "pink";
+      toutesLesQuestions[i].classList.add("echec");
+
+      // Afin de la recharger et quelle se lance une nouvelle fois après validation d'une autre réponse
+      // Il faut la désactiver au bout d'un certain temps (500ms) et qu'elle se recharge par la suite (add)
+      setTimeout(() => {
+        toutesLesQuestions[i].classList.remove("echec");
+      }, 500);
+    }
   }
 }
-backColor();
+
+// Lorsque réponse fausse et essai de correction : le joueur clique sur le quizz ou radio-btn et l'encart redevient blanc
+// UTILISATION DE LA METHODE FOREACH
+toutesLesQuestions.forEach((questquizz) =>
+  questquizz.addEventListener("click", () => {
+    questquizz.style.background = "white";
+  })
+);
+//  2 FONCTIONS ARRAY SONT COMBINEES MAIS ON AURAIT PU IMBRIQUER UNE ARRAY ET UNE DECLARATION
+// toutesLesQuestions.forEach((questquizz) =>
+//   questquizz.addEventListener("click", function () {
+//     questquizz.style.background = "white";
+//   })
+// );

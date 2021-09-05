@@ -78,7 +78,7 @@ p {
 }
 
 /* Ajout de l'animation Echec */
-
+/* CLASS NON LIEE AU HTML MAIS EN ATTENTE D'APPEL EN JS : CLASSLIST.ADD('ECHEC') OU CLASSLIST.REMOVE('ECHEC')*/
 .echec {
   animation: echec 0.3s ease-in-out;
 }
@@ -115,16 +115,4 @@ p {
   text-align: center;
   font-size: 25px;
   margin-top: 10px;
-}
-
-/* CSS pour la programmation */
-
-/* Class couleurs questionnaires valides ou non valides*/
-
-.ok {
-  background: rgb(141, 243, 141);
-}
-
-.wrong {
-  background: rgb(253, 164, 179);
 }
